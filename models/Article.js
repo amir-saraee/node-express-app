@@ -1,6 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/database');
-const Category = require('./Category')
+const Category = require('./Category');
 
 class Article extends Model {}
 
@@ -43,9 +43,7 @@ Article.init(
   }
 );
 
-
 // Define the association with Category (many-to-one)
-Article.belongsTo(Category, { foreignKey: 'category_id', as: 'categories' });
-
+Article.belongsTo(Category, { foreignKey: 'category_id', as: 'category' });
 
 module.exports = Article;

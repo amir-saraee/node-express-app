@@ -1,12 +1,21 @@
-const express = require('express')
+const express = require('express');
 
-const router = express.Router()
+const router = express.Router();
 
-const {createArticle,deleteArticle,getArticleById,getArticles,updateArticle} = require('../controllers/articleController')
+const auth = require('../middleware/authMiddleware');
 
+const {
+  createArticle,
+  deleteArticle,
+  getArticleById,
+  getArticles,
+  updateArticle,
+} = require('../controllers/articleController');
 
-router.get('/articles',  getArticles)
-router.get('/articles/:id', getArticleById)
-router.post('/articles/', createArticle)
+router.get('/articles', getArticles);
+router.get('/articles/:id', getArticleById);
+router.post('/articles/', auth, createArticle);
+router.put('/articles/:id', auth, updateArticle);
+router.delete('/articles/:id', auth, deleteArticle);
 
-module.exports = router
+module.exports = router;

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const Course = require('./Course')
+const Course = require('./Course');
 
 const CourseVideo = sequelize.define('CourseVideo', {
   name: {
@@ -9,15 +9,16 @@ const CourseVideo = sequelize.define('CourseVideo', {
   },
   duration: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   size: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   isPaid: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    allowNull: true,
+    defaultValue: true,
   },
   link: {
     type: DataTypes.STRING,
@@ -25,6 +26,6 @@ const CourseVideo = sequelize.define('CourseVideo', {
   },
 });
 
-CourseVideo.belongsTo(Course, { foreignKey: 'courseId' }); // Define the many-to-one relationship
+// CourseVideo.belongsTo(Course, { foreignKey: 'courseId' }); // Define the many-to-one relationship
 
 module.exports = CourseVideo;

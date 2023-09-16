@@ -4,16 +4,16 @@ const Category = require('../models/Category');
 // Create a new article
 const createArticle = async (req, res) => {
   try {
-    const { categoryId, slug, title, abstract, more } = req.body;
+    const { category_id, slug, title, abstract, more } = req.body;
 
     // Check if the category exists
-    const category = await Category.findByPk(categoryId);
+    const category = await Category.findByPk(category_id);
     if (!category) {
       return res.status(400).json({ message: 'Category not found' });
     }
 
     const article = await Article.create({
-      categoryId,
+      category_id,
       slug,
       title,
       abstract,
@@ -31,7 +31,7 @@ const createArticle = async (req, res) => {
 const getArticles = async (req, res) => {
   try {
     const articles = await Article.findAll({
-      include: {model: Category, as: "categories"}, // Include the associated Category model
+      include: { model: Category, as: 'category' }, // Include the associated Category model
     });
 
     return res.status(200).json(articles);
@@ -46,7 +46,7 @@ const getArticleById = async (req, res) => {
   try {
     const articleId = req.params.id;
     const article = await Article.findByPk(articleId, {
-      include: {model: Category, as: "categories"}, // Include the associated Category model
+      include: { model: Category, as: 'categories' }, // Include the associated Category model
     });
 
     if (!article) {

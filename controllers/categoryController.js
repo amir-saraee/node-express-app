@@ -3,10 +3,13 @@ const Category = require('../models/Category');
 // Create a new category
 const createCategory = async (req, res) => {
   try {
-    const { parentId, name, slug, description, sort, isSelectable, isActive } = req.body;
+    const { parentId, name, slug, description, sort, isSelectable, isActive } =
+      req.body;
 
-    if(!name || !slug || !sort || !isSelectable || !isActive) {
-        return res.status(400).json({success: false, message: "Some fields are not provided."})
+    if (!name || !slug || !sort || !isSelectable || !isActive) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'Some fields are not provided.' });
     }
 
     const category = await Category.create({
@@ -59,7 +62,8 @@ const getCategoryById = async (req, res) => {
 const updateCategory = async (req, res) => {
   try {
     const categoryId = req.params.id;
-    const { parentId, name, slug, description, sort, isSelectable, isActive } = req.body;
+    const { parentId, name, slug, description, sort, isSelectable, isActive } =
+      req.body;
 
     const category = await Category.findByPk(categoryId);
 
